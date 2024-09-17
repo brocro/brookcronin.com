@@ -124,13 +124,24 @@ float dist(vec3 p) {
     // Create an audio analyser
     // audioAnalyser = new THREE.AudioAnalyser(sound, 32);
 
-    // Add button functionality to toggle sound on and off
+    // Add event listener for user interaction to start audio
     const threeSceneButton = document.getElementById('three-scene-button') as HTMLButtonElement;
     threeSceneButton.addEventListener('click', () => {
-      if (sound.isPlaying) {
-        sound.pause();
+      // Check if the AudioContext is suspended, and resume it if so
+      if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+          if (sound.isPlaying) {
+            sound.pause(); // Toggle audio playback
+          } else {
+            sound.play();
+          }
+        });
       } else {
-        sound.play();
+        if (sound.isPlaying) {
+          sound.pause();
+        } else {
+          sound.play();
+        }
       }
     });
   }

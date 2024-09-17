@@ -1,10 +1,14 @@
 import './style.css'
 import { initThreeScene } from './threeScene.ts'
 
+// Dynamically resolve asset paths
+const soundImage = new URL('./assets/sound.png', import.meta.url).href;
+const muteImage = new URL('./assets/mute.png', import.meta.url).href;
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="top-menu">
     <button id="three-scene-button">
-      <img src="assets/sound.png" alt="Action" />
+      <img src="${soundImage}" alt="Action" />
     </button>
     <h1>BROOK CRONIN - DESIGN, ART & ENGINEERING</h1>
   </div>
@@ -12,7 +16,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="footer-bar">
     <p>&copy; ${new Date().getFullYear()} Brook Cronin</p>
     <a id="contact-link" href="#">
-      <img src="assets/mailMe.png" alt="Contact" />
+      <img src="mailMe.png" alt="Contact" />
     </a>
   </div>
 `
@@ -26,9 +30,9 @@ const threeSceneButton = document.getElementById('three-scene-button') as HTMLBu
 threeSceneButton.addEventListener('click', () => {
   const img = threeSceneButton.querySelector('img') as HTMLImageElement;
   if (img.src.includes('sound.png')) {
-    img.src = './assets/mute.png'; // Switch to unsound image
+    img.src = muteImage; // Switch to mute image
   } else {
-    img.src = './assets/sound.png'; // Switch back to sound image
+    img.src = soundImage; // Switch back to sound image
   }
   // Call a function from threeScene or perform an action
   console.log('Button clicked!');

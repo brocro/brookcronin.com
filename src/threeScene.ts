@@ -12,7 +12,7 @@ let controls: OrbitControls;
 let container: HTMLElement | null;
 let audioListener: THREE.AudioListener;
 let sound: THREE.Audio;
-let audioAnalyser: THREE.AudioAnalyser;
+// let audioAnalyser: THREE.AudioAnalyser;
 
 interface Settings {
   res: number;
@@ -122,7 +122,7 @@ float dist(vec3 p) {
     });
 
     // Create an audio analyser
-    audioAnalyser = new THREE.AudioAnalyser(sound, 32);
+    // audioAnalyser = new THREE.AudioAnalyser(sound, 32);
 
     // Add button functionality to toggle sound on and off
     const threeSceneButton = document.getElementById('three-scene-button') as HTMLButtonElement;
@@ -218,16 +218,16 @@ float dist(vec3 p) {
     if (settings.autoRotate && meshFromSDF) {
       meshFromSDF.rotation.y += Math.PI * 0.005 * clock.getDelta();
 
-      if (audioAnalyser) {
+      //if (audioAnalyser) {
         // Get the frequency data
-        const frequencyData = audioAnalyser.getFrequencyData();
+        //const frequencyData = audioAnalyser.getFrequencyData();
         // Get the average frequency
-        const averageFrequency = audioAnalyser.getAverageFrequency();
+        // const averageFrequency = audioAnalyser.getAverageFrequency();
 
         // Log the frequency data and average frequency to the console
         // console.log('Frequency Data:', frequencyData);
         // console.log('Average Frequency:', averageFrequency);
-      }
+      // }
     }
 
     render();

@@ -10,6 +10,9 @@ let camera: THREE.OrthographicCamera;
 let clock: THREE.Clock;
 let controls: OrbitControls;
 let container: HTMLElement | null;
+let audioListener: THREE.AudioListener;
+let sound: THREE.Audio;
+let audioAnalyser: THREE.AudioAnalyser;
 
 interface Settings {
   res: number;
@@ -32,8 +35,8 @@ const settings: Settings = {
 export function initThreeScene() {
   container = document.getElementById('three-container');
   if (!container) {
-      console.error('Container element not found');
-      return;
+    console.error('Container element not found');
+    return;
   }
 
 
@@ -81,13 +84,13 @@ float dist(vec3 p) {
       console.error('Container element not found');
     }
     renderer.setAnimationLoop(animate);
-       // Append canvas to the correct container
-       if (container) {
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
-      } else {
-        console.error('Container element not found');
-      }
+    // Append canvas to the correct container
+    if (container) {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+    } else {
+      console.error('Container element not found');
+    }
 
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -96,8 +99,40 @@ float dist(vec3 p) {
     onWindowResize();
 
     scene.background = new THREE.Color(0x202020);  // Dark background instead of white
-
+    // Initialize the audio
+    initAudio();
+    // compile
     compile();
+  }
+
+  function initAudio(): void {
+    // Add audio listener to the camera
+    audioListener = new THREE.AudioListener();
+    camera.add(audioListener);
+
+    // Create global audio source
+    sound = new THREE.Audio(audioListener);
+
+    // Load sound
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('./audio/tech.wav', (buffer) => {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.5);
+    });
+
+    // Create an audio analyser
+    audioAnalyser = new THREE.AudioAnalyser(sound, 32);
+
+    // Add button functionality to toggle sound on and off
+    const threeSceneButton = document.getElementById('three-scene-button') as HTMLButtonElement;
+    threeSceneButton.addEventListener('click', () => {
+      if (sound.isPlaying) {
+        sound.pause();
+      } else {
+        sound.play();
+      }
+    });
   }
 
   function compile(): void {
@@ -151,22 +186,22 @@ float dist(vec3 p) {
   }
 
   function onWindowResize(): void {
-      if (!container) {
-          console.error('Container element not found');
-          return;
-      }
+    if (!container) {
+      console.error('Container element not found');
+      return;
+    }
 
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
 
-      renderer.setSize(w, h);
+    renderer.setSize(w, h);
 
-      camera.left = w / -2;
-      camera.right = w / 2;
-      camera.top = h / 2;
-      camera.bottom = h / -2;
+    camera.left = w / -2;
+    camera.right = w / 2;
+    camera.top = h / 2;
+    camera.bottom = h / -2;
 
-      camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
   }
 
   function render(): void {
@@ -182,6 +217,17 @@ float dist(vec3 p) {
 
     if (settings.autoRotate && meshFromSDF) {
       meshFromSDF.rotation.y += Math.PI * 0.005 * clock.getDelta();
+
+      if (audioAnalyser) {
+        // Get the frequency data
+        const frequencyData = audioAnalyser.getFrequencyData();
+        // Get the average frequency
+        const averageFrequency = audioAnalyser.getAverageFrequency();
+
+        // Log the frequency data and average frequency to the console
+        console.log('Frequency Data:', frequencyData);
+        console.log('Average Frequency:', averageFrequency);
+      }
     }
 
     render();

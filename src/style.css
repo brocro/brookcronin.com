@@ -18,18 +18,38 @@ body {
 
 .top-menu {
   background-color: #181818;
-  color: rgb(162, 162, 162);
+  color: #a2a2a2;
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative; /* Add relative positioning */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#three-scene-button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  box-shadow: none; /* Remove any box shadow */
+  color: inherit; /* Inherit text color */
+  position: absolute; /* Use absolute positioning */
+  left: 20px; /* Align to the left edge with padding */
+  cursor: pointer; /* Change cursor to pointer */
+  padding: 0; /* Remove default padding */
+  outline: none; /* Remove outline */
+}
+
+#three-scene-button img {
+  width: 16px; /* Set the width of the icon */
+  height: 16px; /* Set the height of the icon */
 }
 
 .top-menu h1 {
   margin: 0;
   font-size: 1em;
   font-weight: normal;
+  flex-grow: 1; /* Allow the header to grow and center itself */
+  text-align: center; /* Center the text */
 }
 
 html {

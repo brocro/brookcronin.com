@@ -9,7 +9,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="footer-bar">
     <p>&copy; ${new Date().getFullYear()} Brook Cronin</p>
     <a id="contact-link" href="#">
-      <img src="path/to/contact-icon.png" alt="Contact" />
+      <img src="assets/mailMe.png" alt="Contact" />
     </a>
   </div>
 `

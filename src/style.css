@@ -52,7 +52,7 @@ html {
 
 .footer-bar {
   background-color: #181818;
-  color: rgb(92, 92, 92);
+  color: #5c5c5c;
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -72,6 +72,6 @@ html {
 }
 
 .footer-bar img {
-  width: 24px;
-  height: 24px;
+  width: 16;
+  height: 16px;
 }

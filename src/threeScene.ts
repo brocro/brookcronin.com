@@ -225,8 +225,8 @@ float dist(vec3 p) {
         const averageFrequency = audioAnalyser.getAverageFrequency();
 
         // Log the frequency data and average frequency to the console
-        console.log('Frequency Data:', frequencyData);
-        console.log('Average Frequency:', averageFrequency);
+        // console.log('Frequency Data:', frequencyData);
+        // console.log('Average Frequency:', averageFrequency);
       }
     }
 

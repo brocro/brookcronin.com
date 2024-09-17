@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import * as path from 'path';
 
 export default defineConfig({
-  base: '/',  // Base path, for GitHub Pages or custom domains, adjust this if needed
+  base: '/',  // Base path for custom domains
   build: {
     outDir: 'dist',  // Output directory for the build
     assetsDir: 'assets',  // Directory to store generated assets like images, audio, etc.

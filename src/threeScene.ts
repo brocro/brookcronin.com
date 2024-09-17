@@ -115,7 +115,7 @@ float dist(vec3 p) {
 
     // Load sound
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('./assets/tech.wav', (buffer) => {
+    audioLoader.load('assets/tech.wav', (buffer) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
       sound.setVolume(0.5);

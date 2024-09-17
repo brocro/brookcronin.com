@@ -1,62 +1,189 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { SDFGeometryGenerator } from 'three/examples/jsm/geometries/SDFGeometryGenerator.js';
 
-let container: HTMLElement | null;
-let camera: THREE.PerspectiveCamera;
-let scene: THREE.Scene;
+
 let renderer: THREE.WebGLRenderer;
+let meshFromSDF: THREE.Mesh | null;
+let scene: THREE.Scene;
+let camera: THREE.OrthographicCamera;
+let clock: THREE.Clock;
+let controls: OrbitControls;
+let container: HTMLElement | null;
+
+interface Settings {
+  res: number;
+  bounds: number;
+  autoRotate: boolean;
+  wireframe: boolean;
+  material: 'depth' | 'normal';
+  vertexCount: string;
+}
+
+const settings: Settings = {
+  res: 3,
+  bounds: 1,
+  autoRotate: true,
+  wireframe: true,
+  material: 'depth',
+  vertexCount: '0'
+};
 
 export function initThreeScene() {
   container = document.getElementById('three-container');
   if (!container) {
-    console.error('Container element not found');
-    window.addEventListener('load', () => {
-        const resizeEvent = new Event('resize');
-        window.dispatchEvent(resizeEvent); // Force resize after the page loads
-      });
-    return;
+      console.error('Container element not found');
+      return;
   }
 
-  // Create a scene
-  scene = new THREE.Scene();
 
-  // Create a camera
-  camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.z = 5;
+  // Example SDF from https://www.shadertoy.com/view/MdXSWn -->
 
-  // Create a renderer
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  container.appendChild(renderer.domElement);
+  const shader = /* glsl */`
+float juliaSetDistance(vec3 p) {
+    vec4 z = vec4(p, 0.0);
+    vec4 c = vec4(0.355, 0.355, 0.355, 0.0);
+    for (int i = 0; i < 16; i++) {
+        z = vec4(z.x*z.x - z.y*z.y - z.z*z.z - z.w*z.w,
+                 2.0*z.x*z.y,
+                 2.0*z.x*z.z,
+                 2.0*z.x*z.w) + c;
+        if (dot(z, z) > 4.0) break;
+    }
+    return 0.5 * log(dot(z, z)) * length(z) / length(vec3(z));
+}
 
-  // Add a simple cube to the scene
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+float dist(vec3 p) {
+    return juliaSetDistance(p);
+}
 
-  // Render the scene
-  function animate() {
-    requestAnimationFrame(animate);
+`;
 
-    // Rotate the cube for some animation
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+  init();
 
+  function init(): void {
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    camera = new THREE.OrthographicCamera(w / -2, w / 2, h / 2, h / -2, 0.01, 1600);
+    camera.position.z = 1100;
+
+    scene = new THREE.Scene();
+
+    clock = new THREE.Clock();
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    if (container) {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    } else {
+      console.error('Container element not found');
+    }
+    renderer.setAnimationLoop(animate);
+       // Append canvas to the correct container
+       if (container) {
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+      } else {
+        console.error('Container element not found');
+      }
+
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    window.addEventListener('resize', onWindowResize);
+    onWindowResize();
+
+    scene.background = new THREE.Color(0x202020);  // Dark background instead of white
+
+    compile();
+  }
+
+  function compile(): void {
+    const generator = new SDFGeometryGenerator(renderer);
+    const geometry = generator.generate(Math.pow(2, settings.res + 2), shader, settings.bounds);
+    geometry.computeVertexNormals();
+
+    if (meshFromSDF) { // updates mesh
+      meshFromSDF.geometry.dispose();
+      meshFromSDF.geometry = geometry;
+    } else { // inits meshFromSDF : THREE.Mesh
+      meshFromSDF = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+      scene.add(meshFromSDF);
+
+      const scale = container ? Math.min(container.clientWidth, container.clientHeight) / 2 * 0.66 : 0;
+      meshFromSDF.scale.set(scale, scale, scale);
+
+      setMaterial();
+    }
+
+    settings.vertexCount = geometry.attributes.position.count.toString();
+
+    // Get bounding box of the mesh to adjust camera position
+    const boundingBox = new THREE.Box3().setFromObject(meshFromSDF);
+    const boundingSize = boundingBox.getSize(new THREE.Vector3());
+    const boundingCenter = boundingBox.getCenter(new THREE.Vector3());
+
+    // Set the camera position relative to the bounding box
+    const distance = boundingSize.length(); // Calculate the distance based on size
+    camera.position.set(boundingCenter.x, boundingCenter.y, boundingCenter.z + distance * 1); // Adjust z-distance to 1.5x size
+
+    camera.lookAt(boundingCenter); // Ensure the camera is looking at the center of the mesh
+
+    // Set the zoom level based on object size (closer view)
+    camera.zoom = 12; // Adjust this value to zoom in more (higher means closer zoom)
+    camera.updateProjectionMatrix(); // Update projection after changing zoom
+  }
+
+  function setMaterial(): void {
+    if (!meshFromSDF) return;
+
+    (meshFromSDF.material as THREE.Material).dispose();
+
+    if (settings.material === 'depth') {
+      meshFromSDF.material = new THREE.MeshDepthMaterial();
+    } else if (settings.material === 'normal') {
+      meshFromSDF.material = new THREE.MeshNormalMaterial();
+    }
+
+    (meshFromSDF.material as THREE.MeshBasicMaterial).wireframe = settings.wireframe;
+  }
+
+  function onWindowResize(): void {
+      if (!container) {
+          console.error('Container element not found');
+          return;
+      }
+
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+
+      renderer.setSize(w, h);
+
+      camera.left = w / -2;
+      camera.right = w / 2;
+      camera.top = h / 2;
+      camera.bottom = h / -2;
+
+      camera.updateProjectionMatrix();
+  }
+
+  function render(): void {
     renderer.render(scene, camera);
+    setTimeout(() => {
+      renderer.setAnimationLoop(animate);
+    }, 50);  // Small delay to ensure all assets have loaded
   }
 
-  // Ensure the renderer and camera adjust when window size changes
-  window.addEventListener('resize', () => {
-    renderer.setSize(container!.clientWidth, container!.clientHeight);
-    camera.aspect = container!.clientWidth / container!.clientHeight;
-    camera.updateProjectionMatrix();
-  });
+  function animate(): void {
 
-  // Initial render to ensure correct sizing
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  camera.aspect = container.clientWidth / container.clientHeight;
-  camera.updateProjectionMatrix();
-  renderer.render(scene, camera);
+    controls.update();
 
-  animate();
+    if (settings.autoRotate && meshFromSDF) {
+      meshFromSDF.rotation.y += Math.PI * 0.005 * clock.getDelta();
+    }
+
+    render();
+  }
 }

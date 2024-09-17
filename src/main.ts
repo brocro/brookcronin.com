@@ -13,16 +13,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </a>
   </div>
 `
-
-initThreeScene();
-
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('three-container');
-
-  if (container) {
-    const resizeEvent = new Event('resize');
-    window.dispatchEvent(resizeEvent); // Force a resize event after the DOM is fully loaded
-  }
+window.addEventListener('load', () => {
+  initThreeScene();
 });
 
 // Obscure email address to prevent scraping

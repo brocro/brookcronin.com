@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SDFGeometryGenerator } from 'three/examples/jsm/geometries/SDFGeometryGenerator.js';
 import { EffectComposer, RenderPass, EffectPass } from 'postprocessing';
 import { ChromaticAberrationEffect } from 'postprocessing';
-import { juliaSetShader, mandelbulb } from './shaders.ts';
+import { juliaSetShader, mandelbulb, mandelbox, boxHoles } from './shaders.ts';
 import { audioFiles } from './audioLinks';
 
 
@@ -48,7 +48,7 @@ export function initThreeScene() {
 
   // Function to randomly select a shader
   function getRandomShader() {
-    const shaders = [juliaSetShader, mandelbulb];
+    const shaders = [juliaSetShader, mandelbulb, mandelbox, boxHoles];
     const randomIndex = Math.floor(Math.random() * shaders.length);
     return shaders[randomIndex];
   }
@@ -189,7 +189,7 @@ function getRandomAudioFile() {
     camera.lookAt(boundingCenter); // Ensure the camera is looking at the center of the mesh
 
     // Set the zoom level based on object size (closer view)
-    camera.zoom = 12; // Adjust this value to zoom in more (higher means closer zoom)
+    camera.zoom = 10; // Adjust this value to zoom in more (higher means closer zoom)
     camera.updateProjectionMatrix(); // Update projection after changing zoom
   }
 
@@ -245,7 +245,15 @@ function getRandomAudioFile() {
     controls.update();
 
     if (settings.autoRotate && meshFromSDF) {
-      meshFromSDF.rotation.y += Math.PI * 0.005 * clock.getDelta();
+      const deltaTime = clock.getDelta(); // Get the time since the last frame
+
+      // Adjust rotation speed factor (can tweak this value to make it faster or slower)
+      const rotationSpeed = Math.PI * 0.005;
+
+      // Apply rotation to all axes
+      meshFromSDF.rotation.y += rotationSpeed * deltaTime;
+      meshFromSDF.rotation.z += rotationSpeed * deltaTime;
+      meshFromSDF.rotation.x += rotationSpeed * deltaTime;
 
       if (audioAnalyser) {
         // Get the frequency data

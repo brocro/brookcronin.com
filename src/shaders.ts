@@ -44,3 +44,31 @@ export const mandelbulb = /* glsl */`
             return mandelbulb(p) - 1.0; // Create a surface at distance 1
         }
 `;
+
+export const mandelbox = /* glsl */`
+    float dist(vec3 p) {
+        vec3 z = p;
+        float scale = 2.0;
+        float offset = 1.0;
+        float fixedRadius = 1.0;
+        float minRadius = 0.5;
+        for (int i = 0; i < 10; i++) {
+            z = clamp(z, -fixedRadius, fixedRadius) * 2.2 - z;
+            z *= scale;
+            z += p * offset;
+        }
+        return length(z) / abs(scale) - minRadius;
+    }
+`;
+
+export const boxHoles = /* glsl */`
+    float dist(vec3 p) {
+        vec3 boxSize = vec3(0.5, 0.5, 0.5); // Box dimensions
+        float radius = 0.1; // Rounding radius
+        vec3 q = abs(p) - boxSize + vec3(radius);
+        float distBox = length(max(q, vec3(0.0))) - radius;
+        float holeRadius = 0.2;
+        float distHoles = length(p.xy) - holeRadius;
+        return max(distBox, -distHoles);
+    }
+`;

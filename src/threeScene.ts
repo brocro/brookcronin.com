@@ -1,6 +1,10 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SDFGeometryGenerator } from 'three/examples/jsm/geometries/SDFGeometryGenerator.js';
+import { EffectComposer } from 'postprocessing';
+import { RenderPass } from 'postprocessing';
+import { ChromaticAberrationEffect } from 'postprocessing';
+import { juliaSetShader, mandelbulb } from './shaders.ts';
 
 
 let renderer: THREE.WebGLRenderer;
@@ -12,7 +16,10 @@ let controls: OrbitControls;
 let container: HTMLElement | null;
 let audioListener: THREE.AudioListener;
 let sound: THREE.Audio;
-// let audioAnalyser: THREE.AudioAnalyser;
+let audioAnalyser: THREE.AudioAnalyser;
+let composer: EffectComposer;
+let chromaticAberrationEffect: ChromaticAberrationEffect;
+
 
 interface Settings {
   res: number;
@@ -39,28 +46,15 @@ export function initThreeScene() {
     return;
   }
 
+  // Function to randomly select a shader
+  function getRandomShader() {
+    const shaders = [juliaSetShader, mandelbulb];
+    const randomIndex = Math.floor(Math.random() * shaders.length);
+    return shaders[randomIndex];
+  }
 
-  // Example SDF from https://www.shadertoy.com/view/MdXSWn -->
-
-  const shader = /* glsl */`
-float juliaSetDistance(vec3 p) {
-    vec4 z = vec4(p, 0.0);
-    vec4 c = vec4(0.355, 0.355, 0.355, 0.0);
-    for (int i = 0; i < 16; i++) {
-        z = vec4(z.x*z.x - z.y*z.y - z.z*z.z - z.w*z.w,
-                 2.0*z.x*z.y,
-                 2.0*z.x*z.z,
-                 2.0*z.x*z.w) + c;
-        if (dot(z, z) > 4.0) break;
-    }
-    return 0.5 * log(dot(z, z)) * length(z) / length(vec3(z));
-}
-
-float dist(vec3 p) {
-    return juliaSetDistance(p);
-}
-
-`;
+  // Use the randomly selected shader
+  const shader = getRandomShader();
 
   init();
 
@@ -101,6 +95,9 @@ float dist(vec3 p) {
     scene.background = new THREE.Color(0x202020);  // Dark background instead of white
     // Initialize the audio
     initAudio();
+
+    initPostProcessing();
+
     // compile
     compile();
   }
@@ -113,18 +110,18 @@ float dist(vec3 p) {
     // Create global audio source
     sound = new THREE.Audio(audioListener);
 
-  // Load sound from Google Drive
-  const audioLoader = new THREE.AudioLoader();
-  audioLoader.load('https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/LateAgain.mp3', (buffer) => {
-    sound.setBuffer(buffer);
-    sound.setLoop(true);
-    sound.setVolume(0.5);
-  });
+    // Load sound from Google Drive
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/LateAgain.mp3', (buffer) => {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.5);
+    });
 
 
 
     // Create an audio analyser
-    // audioAnalyser = new THREE.AudioAnalyser(sound, 32);
+    audioAnalyser = new THREE.AudioAnalyser(sound, 32);
 
     // Get the AudioContext directly from THREE
     const audioContext = THREE.AudioContext.getContext();
@@ -203,6 +200,15 @@ float dist(vec3 p) {
     (meshFromSDF.material as THREE.MeshBasicMaterial).wireframe = settings.wireframe;
   }
 
+  function initPostProcessing() {
+    composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+
+    chromaticAberrationEffect = new ChromaticAberrationEffect();
+    composer.addPass(chromaticAberrationEffect as any);
+  }
+
   function onWindowResize(): void {
     if (!container) {
       console.error('Container element not found');
@@ -236,16 +242,23 @@ float dist(vec3 p) {
     if (settings.autoRotate && meshFromSDF) {
       meshFromSDF.rotation.y += Math.PI * 0.005 * clock.getDelta();
 
-      //if (audioAnalyser) {
+      if (audioAnalyser) {
         // Get the frequency data
-        //const frequencyData = audioAnalyser.getFrequencyData();
-        // Get the average frequency
-        // const averageFrequency = audioAnalyser.getAverageFrequency();
+        const frequencyData = audioAnalyser.getFrequencyData();
+        //Get the average frequency
+        const averageFrequency = audioAnalyser.getAverageFrequency();
 
-        // Log the frequency data and average frequency to the console
-        // console.log('Frequency Data:', frequencyData);
-        // console.log('Average Frequency:', averageFrequency);
-      // }
+        // Map the average frequency to a suitable range for the chromatic aberration effect
+        const offset = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 0.5);
+        chromaticAberrationEffect.offset.set(offset, offset);
+
+        //Log the frequency data and average frequency to the console
+        console.log('Frequency Data:', frequencyData);
+        console.log('Average Frequency:', averageFrequency);
+
+        // Log the offset to see if it's being set correctly
+        console.log('Chromatic Aberration Offset:', offset);
+      }
     }
 
     render();

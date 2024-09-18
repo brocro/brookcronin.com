@@ -5,6 +5,7 @@ import { EffectComposer } from 'postprocessing';
 import { RenderPass } from 'postprocessing';
 import { ChromaticAberrationEffect } from 'postprocessing';
 import { juliaSetShader, mandelbulb } from './shaders.ts';
+import { audioFiles } from './audioLinks';
 
 
 let renderer: THREE.WebGLRenderer;
@@ -102,6 +103,12 @@ export function initThreeScene() {
     compile();
   }
 
+  // Function to randomly select an audio file link
+function getRandomAudioFile() {
+  const randomIndex = Math.floor(Math.random() * audioFiles.length);
+  return audioFiles[randomIndex];
+}
+
   function initAudio(): void {
     // Add audio listener to the camera
     audioListener = new THREE.AudioListener();
@@ -110,12 +117,13 @@ export function initThreeScene() {
     // Create global audio source
     sound = new THREE.Audio(audioListener);
 
-    // Load sound from Google Drive
+    // Load random track from github repo
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/LateAgain.mp3', (buffer) => {
+    const soundUrl = getRandomAudioFile();
+    audioLoader.load(soundUrl, (buffer) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
-      sound.setVolume(0.5);
+      sound.setVolume(0.8);
     });
 
 

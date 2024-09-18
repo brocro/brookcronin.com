@@ -113,13 +113,15 @@ float dist(vec3 p) {
     // Create global audio source
     sound = new THREE.Audio(audioListener);
 
-    // Load sound
-    const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('assets/tech.wav', (buffer) => {
-      sound.setBuffer(buffer);
-      sound.setLoop(true);
-      sound.setVolume(0.5);
-    });
+  // Load sound from Google Drive
+  const audioLoader = new THREE.AudioLoader();
+  audioLoader.load('https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/LateAgain.mp3', (buffer) => {
+    sound.setBuffer(buffer);
+    sound.setLoop(true);
+    sound.setVolume(0.5);
+  });
+
+
 
     // Create an audio analyser
     // audioAnalyser = new THREE.AudioAnalyser(sound, 32);

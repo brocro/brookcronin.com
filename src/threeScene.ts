@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SDFGeometryGenerator } from 'three/examples/jsm/geometries/SDFGeometryGenerator.js';
-import { EffectComposer } from 'postprocessing';
-import { RenderPass } from 'postprocessing';
+import { EffectComposer, RenderPass, EffectPass } from 'postprocessing';
 import { ChromaticAberrationEffect } from 'postprocessing';
 import { juliaSetShader, mandelbulb } from './shaders.ts';
 import { audioFiles } from './audioLinks';
@@ -214,8 +213,10 @@ function getRandomAudioFile() {
     composer.addPass(renderPass);
 
     chromaticAberrationEffect = new ChromaticAberrationEffect();
-    composer.addPass(chromaticAberrationEffect as any);
+    const effectPass = new EffectPass(camera, chromaticAberrationEffect);
+    composer.addPass(effectPass);
   }
+
 
   function onWindowResize(): void {
     if (!container) {
@@ -237,14 +238,10 @@ function getRandomAudioFile() {
   }
 
   function render(): void {
-    renderer.render(scene, camera);
-    setTimeout(() => {
-      renderer.setAnimationLoop(animate);
-    }, 50);  // Small delay to ensure all assets have loaded
+    composer.render();
   }
 
   function animate(): void {
-
     controls.update();
 
     if (settings.autoRotate && meshFromSDF) {
@@ -253,14 +250,14 @@ function getRandomAudioFile() {
       if (audioAnalyser) {
         // Get the frequency data
         const frequencyData = audioAnalyser.getFrequencyData();
-        //Get the average frequency
+        // Get the average frequency
         const averageFrequency = audioAnalyser.getAverageFrequency();
 
         // Map the average frequency to a suitable range for the chromatic aberration effect
-        const offset = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 0.5);
+        const offset = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 0.01);
         chromaticAberrationEffect.offset.set(offset, offset);
 
-        //Log the frequency data and average frequency to the console
+        // Log the frequency data and average frequency to the console
         console.log('Frequency Data:', frequencyData);
         console.log('Average Frequency:', averageFrequency);
 

@@ -46,7 +46,7 @@ body {
 
 .top-menu h1 {
   margin: 0;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: normal;
   flex-grow: 1; /* Allow the header to grow and center itself */
   text-align: center; /* Center the text */

@@ -6,7 +6,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <button id="three-scene-button">
       <img src="assets/sound.png" alt="Action" />
     </button>
-    <h1>BROOK CRONIN - DESIGN, ART & ENGINEERING</h1>
+    <h1>BROOK CRONIN | ART, MUSIC & ENGINEERING</h1>
   </div>
   <div id="three-container"></div>
   <div class="footer-bar">

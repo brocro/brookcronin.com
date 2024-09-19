@@ -6,6 +6,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',  // Output directory for the build
     assetsDir: 'assets',  // Directory to store generated assets like images, audio, etc.
+    sourcemap: true,  // Set to true for debugging
   },
   resolve: {
     alias: {

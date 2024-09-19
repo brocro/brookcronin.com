@@ -9,12 +9,21 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h1>BROOK CRONIN | ART, MUSIC & ENGINEERING</h1>
   </div>
   <div id="three-container"></div>
-  <div class="footer-bar">
+<div class="footer-bar">
+  <div class="left">
     <p>&copy; ${new Date().getFullYear()} Brook Cronin</p>
+  </div>
+  <div class="center">
+    <p id="track-info">Track: Not playing</p>
+    <p id="shader-info">Shader: None</p>
+    <p id="effect-info">Effect: None</p>
+  </div>
+  <div class="right">
     <a id="contact-link" href="#">
       <img src="assets/mailMe.png" alt="Contact" />
     </a>
   </div>
+</div>
 `
 
 window.addEventListener('load', () => {

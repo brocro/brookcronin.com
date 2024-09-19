@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SDFGeometryGenerator } from 'three/examples/jsm/geometries/SDFGeometryGenerator.js';
 import { EffectComposer, RenderPass, EffectPass } from 'postprocessing';
 import { ChromaticAberrationEffect } from 'postprocessing';
+import { DotScreenEffect } from 'postprocessing';
 import { juliaSetShader, mandelbulb, mandelbox, boxHoles } from './shaders.ts';
 import { audioFiles } from './audioLinks';
 
@@ -19,6 +20,7 @@ let sound: THREE.Audio;
 let audioAnalyser: THREE.AudioAnalyser;
 let composer: EffectComposer;
 let chromaticAberrationEffect: ChromaticAberrationEffect;
+let dotScreenEffect: DotScreenEffect;
 
 
 interface Settings {
@@ -50,6 +52,8 @@ export function initThreeScene() {
   function getRandomShader() {
     const shaders = [juliaSetShader, mandelbulb, mandelbox, boxHoles];
     const randomIndex = Math.floor(Math.random() * shaders.length);
+    const shaderName: string[] = ['Julia Set', 'Mandelbulb', 'Mandelbox', 'Box Holes']; // Declare and initialize the shaderName variable
+    updateShaderInfo(shaderName[randomIndex]);
     return shaders[randomIndex];
   }
 
@@ -102,11 +106,13 @@ export function initThreeScene() {
     compile();
   }
 
-  // Function to randomly select an audio file link
-function getRandomAudioFile() {
-  const randomIndex = Math.floor(Math.random() * audioFiles.length);
-  return audioFiles[randomIndex];
-}
+  // Function to randomly select an audio file object
+  function getRandomAudioFile() {
+    const randomIndex = Math.floor(Math.random() * audioFiles.length);
+    const selectedTrack = audioFiles[randomIndex]; // Get the random audio object
+    updateTrackInfo(selectedTrack.name); // Update the UI with the track name
+    return selectedTrack; // Return the selected track object
+  }
 
   function initAudio(): void {
     // Add audio listener to the camera
@@ -118,14 +124,12 @@ function getRandomAudioFile() {
 
     // Load random track from github repo
     const audioLoader = new THREE.AudioLoader();
-    const soundUrl = getRandomAudioFile();
-    audioLoader.load(soundUrl, (buffer) => {
+    const selectedAudio = getRandomAudioFile();
+    audioLoader.load(selectedAudio.url, (buffer) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
       sound.setVolume(0.8);
     });
-
-
 
     // Create an audio analyser
     audioAnalyser = new THREE.AudioAnalyser(sound, 32);
@@ -157,10 +161,33 @@ function getRandomAudioFile() {
     });
   }
 
+      //footer bar info functions
+    // Functions to update footer info
+function updateTrackInfo(trackName: string) {
+  const trackInfoElement = document.getElementById('track-info');
+  if (trackInfoElement) {
+    trackInfoElement.textContent = `Track: ${trackName}`;
+  }
+}
+
+function updateShaderInfo(shaderName: string) {
+  const shaderInfoElement = document.getElementById('shader-info');
+  if (shaderInfoElement) {
+    shaderInfoElement.textContent = `Shader: ${shaderName}`;
+  }
+}
+
+function updateEffectInfo(effectName: string) {
+  const effectInfoElement = document.getElementById('effect-info');
+  if (effectInfoElement) {
+    effectInfoElement.textContent = `Effect: ${effectName}`;
+  }
+}
+
   function compile(): void {
     const generator = new SDFGeometryGenerator(renderer);
     const geometry = generator.generate(Math.pow(2, settings.res + 2), shader, settings.bounds);
-    geometry.computeVertexNormals();
+    //geometry.computeVertexNormals();
 
     if (meshFromSDF) { // updates mesh
       meshFromSDF.geometry.dispose();
@@ -207,16 +234,44 @@ function getRandomAudioFile() {
     (meshFromSDF.material as THREE.MeshBasicMaterial).wireframe = settings.wireframe;
   }
 
+  // List of available post-processing effects
+  function getRandomEffect() {
+    const effects = ['chromaticAberration', 'dotScreen']; // Add more effects here as needed
+    const randomIndex = Math.floor(Math.random() * effects.length);
+    updateEffectInfo(effects[randomIndex]);
+    return effects[randomIndex];
+  }
+
+
   function initPostProcessing() {
     composer = new EffectComposer(renderer);
     const renderPass = new RenderPass(scene, camera);
     composer.addPass(renderPass);
 
-    chromaticAberrationEffect = new ChromaticAberrationEffect();
-    const effectPass = new EffectPass(camera, chromaticAberrationEffect);
-    composer.addPass(effectPass);
-  }
+    // Randomly select a post-processing effect
+    const selectedEffect = getRandomEffect();
 
+    if (selectedEffect === 'chromaticAberration') {
+      chromaticAberrationEffect = new ChromaticAberrationEffect({
+        offset: new THREE.Vector2(0.001, 0.001),  // Set default offset values
+        radialModulation: false,
+        modulationOffset: 0
+      });
+      const chromaticAberrationPass = new EffectPass(camera, chromaticAberrationEffect);
+      composer.addPass(chromaticAberrationPass);
+      const effectPass = new EffectPass(camera, chromaticAberrationEffect);
+      composer.addPass(effectPass);
+    } else if (selectedEffect === 'dotScreen') {
+      // Initialize dot screen effect
+      dotScreenEffect = new DotScreenEffect({
+        scale: 0  // Set default scale value
+      });
+      const effectPass = new EffectPass(camera, dotScreenEffect);
+      composer.addPass(effectPass);
+    }
+
+    console.log('Selected Effect:', selectedEffect);  // Debug log to check which effect was chosen
+  }
 
   function onWindowResize(): void {
     if (!container) {
@@ -257,20 +312,25 @@ function getRandomAudioFile() {
 
       if (audioAnalyser) {
         // Get the frequency data
-        const frequencyData = audioAnalyser.getFrequencyData();
+        //const frequencyData = audioAnalyser.getFrequencyData();
         // Get the average frequency
         const averageFrequency = audioAnalyser.getAverageFrequency();
 
-        // Map the average frequency to a suitable range for the chromatic aberration effect
-        const offset = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 0.01);
-        chromaticAberrationEffect.offset.set(offset, offset);
-
+        //console.log('Average Frequency:', averageFrequency);
         // Log the frequency data and average frequency to the console
-        console.log('Frequency Data:', frequencyData);
-        console.log('Average Frequency:', averageFrequency);
+        //console.log('Frequency Data:', frequencyData);
 
-        // Log the offset to see if it's being set correctly
-        console.log('Chromatic Aberration Offset:', offset);
+
+        // Apply frequency data to the currently selected post-processing effect
+        if (chromaticAberrationEffect) {
+          const offset = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 0.01);
+          chromaticAberrationEffect.offset.set(offset, offset);
+
+        } else if (dotScreenEffect) {
+          // You can control dot intensity or scale using audio
+          dotScreenEffect.scale = THREE.MathUtils.mapLinear(averageFrequency, 0, 256, 0, 10);
+          console.log('DotScreen Scale:', dotScreenEffect.scale);
+        }
       }
     }
 

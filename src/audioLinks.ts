@@ -15,4 +15,8 @@ export const audioFiles = [
         name: 'Melancholiian',
         url: 'https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/Melancholiian.mp3'
     },
+    {
+        name: 'Hard Day At The Office',
+        url: 'https://media.githubusercontent.com/media/brocro/audio-storage/main/audio/HardDayAtTheOffice.mp3'
+    },
 ];

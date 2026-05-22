@@ -224,3 +224,14 @@ When the system produces output in your name, read it. Retract what's wrong.
 Correct what's drifted. Cite what's useful.
 
 Both hands. Otherwise it's just a drawing, drawing itself.
+
+# References
+
+- **The Solow paradox.** Robert M. Solow, "We'd Better Watch Out," *New York Times Book Review*, July 12, 1987, p. 36. Reviewing Stephen S. Cohen and John Zysman, *Manufacturing Matters: The Myth of the Post-Industrial Economy*. Broader background: [Productivity paradox](https://en.wikipedia.org/wiki/Productivity_paradox), Wikipedia.
+- **Dead internet theory.** [Dead Internet theory](https://en.wikipedia.org/wiki/Dead_Internet_theory), Wikipedia.
+- **M.C. Escher, *Drawing Hands* (1948).** Lithograph. [Drawing Hands](https://en.wikipedia.org/wiki/Drawing_Hands), Wikipedia.
+- **C2PA — Coalition for Content Provenance and Authenticity.** [c2pa.org](https://c2pa.org/). Adobe's user-facing implementation: [Content Credentials](https://contentcredentials.org/).
+- **SynthID.** Google DeepMind's watermarking system for AI-generated content. [DeepMind — SynthID](https://deepmind.google/technologies/synthid/).
+- **Zero-knowledge proofs.** Originating paper: Goldwasser, Micali, and Rackoff, "The Knowledge Complexity of Interactive Proof Systems," *Proceedings of the 17th ACM Symposium on Theory of Computing*, 1985. Overview: [Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof), Wikipedia.
+- **Ring signatures, group signatures, anonymous credentials, zk-SNARKs.** Entry points: [Ring signature](https://en.wikipedia.org/wiki/Ring_signature), [Group signature](https://en.wikipedia.org/wiki/Group_signature), [Non-interactive zero-knowledge proof](https://en.wikipedia.org/wiki/Non-interactive_zero-knowledge_proof), Wikipedia.
+- **Verified-human projects** mentioned in the text — Semaphore, Sismo, Polygon ID (now Privado ID), World ID, and Privacy Pass. Each takes a different position on the verification-authority problem. [World ID](https://world.org/world-id) is currently the most widely-deployed; Privacy Pass is an active [IETF working group](https://datatracker.ietf.org/wg/privacypass/about/).

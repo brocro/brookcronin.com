@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 // Tiny static-blog generator: Markdown posts -> HTML pages, index, RSS.
-// Reads site/posts/*.md, writes dist/.
+//
+// Post layouts (both supported):
+//   site/posts/<slug>/index.md   (folder with co-located images/assets)
+//   site/posts/<name>.md         (single file, no assets)
+//
+// Output for each post is dist/posts/<slug>/index.html so URLs are
+// /posts/<slug>/ and image paths in the markdown resolve cleanly.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -43,10 +49,8 @@ function preprocessBody(src) {
     const line = lines[i];
     if (/^```/.test(line)) { inFence = !inFence; continue; }
     if (inFence) continue;
-    // Demote heading: # x -> ## x, up to ###### (cap at 6)
     const h = line.match(/^(#{1,5}) (.*)$/);
     if (h) lines[i] = '#' + h[1] + ' ' + h[2];
-    // ![[image.ext]] -> ![](image.ext)
     lines[i] = lines[i].replace(/!\[\[([^\]]+)\]\]/g, (_, p) => `![](${p})`);
   }
   return lines.join('\n');
@@ -76,6 +80,10 @@ function escapeXml(s) {
   return s.replace(/[<>&'"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&apos;', '"': '&quot;' }[c]));
 }
 
+function escapeHtml(s) {
+  return s.replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+}
+
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
@@ -92,22 +100,48 @@ function copyDir(from, to) {
 }
 
 // --- read posts -----------------------------------------------------
+// Each post resolves to { mdPath, assetDir, defaultSlug }:
+//   - folder form: mdPath=<slug>/index.md, assetDir=<slug>/, defaultSlug=<slug>
+//   - flat form:   mdPath=<name>.md,        assetDir=null,    defaultSlug=<name without date prefix>
 
 const postsDir = path.join(siteDir, 'posts');
-const postFiles = fs.existsSync(postsDir)
-  ? fs.readdirSync(postsDir).filter(f => f.endsWith('.md'))
+const entries = fs.existsSync(postsDir)
+  ? fs.readdirSync(postsDir, { withFileTypes: true })
   : [];
 
-const posts = postFiles.map(file => {
-  const raw = fs.readFileSync(path.join(postsDir, file), 'utf8');
+const sources = [];
+for (const entry of entries) {
+  if (entry.isDirectory()) {
+    const indexMd = path.join(postsDir, entry.name, 'index.md');
+    if (fs.existsSync(indexMd)) {
+      sources.push({
+        mdPath: indexMd,
+        assetDir: path.join(postsDir, entry.name),
+        defaultSlug: entry.name,
+      });
+    }
+  } else if (entry.name.endsWith('.md')) {
+    // Strip a leading YYYY-MM-DD- if present so the slug is clean.
+    const base = entry.name.replace(/\.md$/, '');
+    const cleanBase = base.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+    sources.push({
+      mdPath: path.join(postsDir, entry.name),
+      assetDir: null,
+      defaultSlug: cleanBase,
+    });
+  }
+}
+
+const posts = sources.map(({ mdPath, assetDir, defaultSlug }) => {
+  const raw = fs.readFileSync(mdPath, 'utf8');
   const { meta, body } = parseFrontmatter(raw);
-  const title = meta.title || file.replace(/\.md$/, '');
+  const title = meta.title || defaultSlug;
   const date = meta.date ? new Date(meta.date) : new Date();
-  const slug = meta.slug || slugify(title);
+  const slug = meta.slug || slugify(defaultSlug);
   const summary = meta.summary || '';
   const subtitle = meta.subtitle || '';
   const html = marked.parse(preprocessBody(body));
-  return { title, date, slug, summary, subtitle, html };
+  return { title, date, slug, summary, subtitle, html, assetDir };
 }).sort((a, b) => b.date - a.date);
 
 // --- read templates -------------------------------------------------
@@ -122,11 +156,11 @@ const tpl = {
 
 ensureDir(distDir);
 
-// copy static assets
+// shared assets
 fs.copyFileSync(path.join(siteDir, 'style.css'), path.join(distDir, 'style.css'));
 copyDir(path.join(siteDir, 'fonts'), path.join(distDir, 'fonts'));
 
-// favicons + icons from repo root
+// favicons from repo root
 for (const f of ['favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png',
                  'apple-touch-icon.png', 'android-chrome-192x192.png',
                  'android-chrome-512x512.png']) {
@@ -136,40 +170,50 @@ for (const f of ['favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png',
 
 const year = new Date().getFullYear();
 
-// post pages
 ensureDir(path.join(distDir, 'posts'));
 
-// copy any non-md assets in site/posts/ (images, etc.) to dist/posts/
-for (const f of fs.existsSync(postsDir) ? fs.readdirSync(postsDir) : []) {
-  if (f.endsWith('.md')) continue;
-  fs.copyFileSync(path.join(postsDir, f), path.join(distDir, 'posts', f));
-}
-
+// per-post: write index.html and copy assets
 for (const post of posts) {
+  const postDir = path.join(distDir, 'posts', post.slug);
+  ensureDir(postDir);
+
+  if (post.assetDir) {
+    for (const f of fs.readdirSync(post.assetDir)) {
+      if (f === 'index.md') continue;
+      const src = path.join(post.assetDir, f);
+      const dst = path.join(postDir, f);
+      if (fs.statSync(src).isFile()) fs.copyFileSync(src, dst);
+    }
+  }
+
   const out = applyTemplate(tpl.post, {
     site_title: site.title,
     site_tagline: site.tagline,
     author: site.author,
-    post_title: post.title,
-    post_subtitle: post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : '',
-    post_summary: post.summary,
+    post_title: escapeHtml(post.title),
+    post_subtitle: post.subtitle ? `<p class="post-subtitle">${escapeHtml(post.subtitle)}</p>` : '',
+    post_summary: escapeHtml(post.summary),
     post_date: fmtDate(post.date),
     post_iso: post.date.toISOString(),
     post_content: post.html,
     year,
   });
-  fs.writeFileSync(path.join(distDir, 'posts', `${post.slug}.html`), out);
+  fs.writeFileSync(path.join(postDir, 'index.html'), out);
 }
 
 // index
 const postList = posts.length === 0
   ? '<li><p style="color: var(--ink-faint); font-family: var(--sans); font-size: 0.875rem;">No posts yet.</p></li>'
-  : posts.map(p => `
+  : posts.map(p => {
+      const dek = p.subtitle || p.summary;
+      return `
       <li>
-        <a class="post-title" href="/posts/${p.slug}.html">${p.title}</a>
+        <a class="post-title" href="/posts/${p.slug}/">${escapeHtml(p.title)}</a>
         <div class="post-meta"><time datetime="${p.date.toISOString()}">${fmtDate(p.date)}</time></div>
-        ${p.summary ? `<p class="post-summary">${p.summary}</p>` : ''}
-      </li>`).join('\n');
+        ${dek ? `<p class="post-dek">${escapeHtml(dek)}</p>` : ''}
+        <a class="post-link" href="/posts/${p.slug}/">Read &rarr;</a>
+      </li>`;
+    }).join('\n');
 
 const indexOut = applyTemplate(tpl.index, {
   site_title: site.title,
@@ -184,8 +228,8 @@ fs.writeFileSync(path.join(distDir, 'index.html'), indexOut);
 const items = posts.map(p => `
     <item>
       <title>${escapeXml(p.title)}</title>
-      <link>${site.url}/posts/${p.slug}.html</link>
-      <guid isPermaLink="true">${site.url}/posts/${p.slug}.html</guid>
+      <link>${site.url}/posts/${p.slug}/</link>
+      <guid isPermaLink="true">${site.url}/posts/${p.slug}/</guid>
       <pubDate>${rfc822(p.date)}</pubDate>
       ${p.summary ? `<description>${escapeXml(p.summary)}</description>` : ''}
       <content:encoded><![CDATA[${p.html}]]></content:encoded>

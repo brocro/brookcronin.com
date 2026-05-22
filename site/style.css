@@ -304,11 +304,26 @@ img {
   letter-spacing: 0.02em;
 }
 
-.posts .post-summary {
-  margin: 0;
+.posts .post-dek {
+  margin: 0 0 0.9rem;
   color: var(--ink-soft);
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.posts .post-link {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  border: none;
+  text-transform: uppercase;
+}
+
+.posts .post-link:hover {
+  color: var(--ink);
 }
 
 /* Article meta + footer ------------------------------------------- */

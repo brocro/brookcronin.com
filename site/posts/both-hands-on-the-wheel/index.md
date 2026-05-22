@@ -18,6 +18,8 @@ And yet.
 
 Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
 
+The productivity is going somewhere. Where, isn't clear.
+
 In 1987, Robert Solow described an earlier version of this exact paradox:
 
 > *"You can see the computer age everywhere but in the productivity statistics."*

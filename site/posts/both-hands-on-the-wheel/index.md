@@ -18,7 +18,7 @@ And yet.
 
 Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
 
-The effort is going in. The wheels are spinning faster. The output isn't visible yet.
+The belief is universal. The evidence is missing.
 
 In 1987, Robert Solow described an earlier version of this exact paradox:
 

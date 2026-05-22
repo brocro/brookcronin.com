@@ -2,23 +2,25 @@ import { defineConfig } from 'vite';
 import * as path from 'path';
 
 export default defineConfig({
-  base: '/',  // Base path for custom domains
+  root: 'experimental',
+  base: '/experimental/',
   build: {
-    outDir: 'dist',  // Output directory for the build
-    assetsDir: 'assets',  // Directory to store generated assets like images, audio, etc.
-    sourcemap: true,  // Set to true for debugging
+    outDir: '../dist/experimental',
+    assetsDir: 'assets',
+    sourcemap: true,
+    emptyOutDir: true,
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),  // Example alias for easier imports
+      '@': path.resolve(__dirname, 'experimental/src'),
     },
   },
   server: {
-    host: true,  // Set to true if you want to access via IP in your network
-    port: 3000,  // Local dev server port
+    host: true,
+    port: 3000,
   },
-  assetsInclude: ['**/*.mp3', '**/*.wav', '**/*.png', '**/*.jpg'],  // Asset extensions to include
+  assetsInclude: ['**/*.mp3', '**/*.wav', '**/*.png', '**/*.jpg'],
   define: {
-    'process.env': {},  // Fix for libraries depending on Node's process.env
+    'process.env': {},
   },
 });

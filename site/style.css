@@ -1,0 +1,368 @@
+/* Fonts ------------------------------------------------------------ */
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype-variations');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/AtkinsonHyperlegible-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/AtkinsonHyperlegible-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tokens ----------------------------------------------------------- */
+
+:root {
+  --serif: 'Source Serif 4', Charter, 'Iowan Old Style', Georgia, serif;
+  --sans:  'Atkinson Hyperlegible', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --ink:        #1a1815;
+  --ink-soft:   #4a4641;
+  --ink-faint:  #8a857d;
+  --paper:      #fbf9f4;
+  --rule:       #d9d3c5;
+  --link:       #5a3a1a;
+  --link-hover: #1a1815;
+
+  --measure: 34rem;       /* ~62ch at 18px */
+  --leading: 1.65;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:        #e8e3d8;
+    --ink-soft:   #b8b1a3;
+    --ink-faint:  #7a7468;
+    --paper:      #1a1815;
+    --rule:       #3a3530;
+    --link:       #c9a578;
+    --link-hover: #f0e9d8;
+  }
+}
+
+/* Base ------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: var(--leading);
+  font-feature-settings: "kern", "liga", "onum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Layout ----------------------------------------------------------- */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 5rem 1.5rem 6rem;
+}
+
+@media (min-width: 40rem) {
+  .page { padding: 6rem 2rem 8rem; }
+}
+
+/* Masthead --------------------------------------------------------- */
+
+.masthead {
+  margin-bottom: 4rem;
+}
+
+.masthead h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.masthead h1 a {
+  color: var(--ink);
+  text-decoration: none;
+  border: none;
+}
+
+.masthead .tagline {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Typography ------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+article h1 {
+  font-size: 1.875rem;
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.post-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+  font-weight: 400;
+}
+
+article h2 {
+  font-size: 1.375rem;
+  margin: 3rem 0 1rem;
+}
+
+article h3 {
+  font-size: 1.125rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+article h4 {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink);
+  margin: 2.25rem 0 0.5rem;
+  letter-spacing: 0;
+}
+
+article h4 em, article h4 i {
+  font-style: italic;
+}
+
+p {
+  margin: 0 0 1.25rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+em, i { font-style: italic; }
+strong, b { font-weight: 600; }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+a:hover {
+  color: var(--link-hover);
+  border-bottom-color: var(--link-hover);
+}
+
+/* Lists, quotes, code --------------------------------------------- */
+
+ul, ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+li { margin-bottom: 0.4rem; }
+
+blockquote {
+  margin: 1.75rem 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  code { background: rgba(255, 255, 255, 0.06); }
+}
+
+pre {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  background: rgba(0, 0, 0, 0.035);
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem auto;
+  width: 4rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
+}
+
+/* Index post list -------------------------------------------------- */
+
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.posts li {
+  margin-bottom: 2.25rem;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.posts li:last-child {
+  border-bottom: none;
+}
+
+.posts .post-title {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+  border: none;
+  letter-spacing: -0.01em;
+}
+
+.posts .post-title:hover {
+  color: var(--link);
+}
+
+.posts .post-meta {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.posts .post-summary {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* Article meta + footer ------------------------------------------- */
+
+.post-meta {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  margin: 0 0 2.5rem;
+}
+
+.post-meta time {
+  font-variant-numeric: tabular-nums;
+}
+
+.site-footer {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-footer a {
+  color: var(--ink-faint);
+  border-bottom-color: transparent;
+}
+
+.site-footer a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.post-nav {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.post-nav a {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.post-nav a:hover {
+  color: var(--ink);
+}

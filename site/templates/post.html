@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{post_title}} — {{site_title}}</title>
+  <meta name="description" content="{{post_summary}}">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="{{site_title}} feed" href="/feed.xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <h1><a href="/">{{site_title}}</a></h1>
+      <p class="tagline">{{site_tagline}}</p>
+    </header>
+
+    <article>
+      <h1>{{post_title}}</h1>
+      {{post_subtitle}}
+      <p class="post-meta"><time datetime="{{post_iso}}">{{post_date}}</time></p>
+      {{post_content}}
+    </article>
+
+    <nav class="post-nav">
+      <a href="/">&larr; All posts</a>
+    </nav>
+
+    <footer class="site-footer">
+      <span>&copy; {{year}} {{author}}</span>
+      <a href="/feed.xml">RSS</a>
+    </footer>
+  </main>
+</body>
+</html>

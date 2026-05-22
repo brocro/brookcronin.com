@@ -205,7 +205,7 @@ for (const post of posts) {
 const postList = posts.length === 0
   ? '<li><p style="color: var(--ink-faint); font-family: var(--sans); font-size: 0.875rem;">No posts yet.</p></li>'
   : posts.map(p => {
-      const dek = p.subtitle || p.summary;
+      const dek = p.summary || p.subtitle;
       return `
       <li>
         <a class="post-title" href="/posts/${p.slug}/">${escapeHtml(p.title)}</a>

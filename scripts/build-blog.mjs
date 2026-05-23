@@ -112,11 +112,25 @@ const entries = fs.existsSync(postsDir)
 const sources = [];
 for (const entry of entries) {
   if (entry.isDirectory()) {
-    const indexMd = path.join(postsDir, entry.name, 'index.md');
+    const folder = path.join(postsDir, entry.name);
+    // Prefer index.md if present; otherwise use the single .md in the folder.
+    let mdPath = null;
+    const indexMd = path.join(folder, 'index.md');
     if (fs.existsSync(indexMd)) {
+      mdPath = indexMd;
+    } else {
+      const mdFiles = fs.readdirSync(folder).filter(f => f.endsWith('.md'));
+      if (mdFiles.length === 1) {
+        mdPath = path.join(folder, mdFiles[0]);
+      } else if (mdFiles.length > 1) {
+        console.warn(`Skipping ${entry.name}: multiple .md files, none named index.md`);
+        continue;
+      }
+    }
+    if (mdPath) {
       sources.push({
-        mdPath: indexMd,
-        assetDir: path.join(postsDir, entry.name),
+        mdPath,
+        assetDir: folder,
         defaultSlug: entry.name,
       });
     }
@@ -179,7 +193,7 @@ for (const post of posts) {
 
   if (post.assetDir) {
     for (const f of fs.readdirSync(post.assetDir)) {
-      if (f === 'index.md') continue;
+      if (f.endsWith('.md')) continue; // don't ship raw markdown to dist
       const src = path.join(post.assetDir, f);
       const dst = path.join(postDir, f);
       if (fs.statSync(src).isFile()) fs.copyFileSync(src, dst);

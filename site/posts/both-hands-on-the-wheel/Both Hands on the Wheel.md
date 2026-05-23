@@ -32,15 +32,6 @@ Organisations restructured around the computers they had spent a decade buying. 
 
 The AI version is in the hype phase. Whether the gains follow depends on whether the work happens to restructure in the wake of this, and that assumes the economics can ever make sense; which is a huge assumption considering the current cost of compute.
 
-> [!note] Claude's earlier draft of this passage
-> For side-by-side comparison while you decide:
->
-> Solow's resolved itself. By the late 1990s, productivity gains arrived. Not from waiting — from the work that came after the hype. Organisations restructured around the computers they had spent a decade buying. Workflows redesigned. Roles redrawn. Reporting structures rewritten to match what the new tools could actually do.
->
-> The AI version is in the lag phase. Whether the gains follow depends on whether the same restructuring happens — and what shape it takes. The risk is that the lag fills instead with self-referential noise: agents reading agents, summaries citing summaries, motion without direction.
->
-> Your version is tauter and adds a real new claim — that AI economics may not work given current compute costs. That's a substantive bet, and it changes the post's stakes. The previous "lag could fill with noise" framing was rhetorical-risk; the compute-economics framing is empirical-risk. Both defensible. The economics line is stronger but a bigger claim — be ready to back it up.
-
 # Agents producing for Agents
 
 A growing share of what AI tools produce is being consumed by other AI tools. Agents writing reports that other agents read and summarise. Summaries cited in further summaries.
@@ -107,13 +98,6 @@ Two hands drawing each other. No third hand.
 I don't have a metric for this but I am seeing it happen. 
 
 Jira tickets clearly written by AI, without acknowledgement, without disclosure. Colleagues running MCP tools to generate insight reports from those same tickets, Agent output becomes Agent input. It's happening in my organisation right now, probably yours too.
-
-> [!note] Claude's earlier draft of this passage
-> For comparison:
->
-> I don't have a metric for this yet. I am seeing it happen. Jira tickets clearly written by AI, posted without acknowledgement. Colleagues running MCP tools to generate insight reports from those same tickets. The chain is forming inside organisations now — mine, and probably yours.
->
-> Your "Agent output becomes Agent input" is a punchier line than anything in my draft and earns its place. The doubled "without acknowledgement, without disclosure" works for emphasis too.
 
 By Stage 2, behavioural fixes are too slow. The countermeasures have to become technical — provenance enforcement, generation-depth limits, gating new AI output on whether the previous output was actually read by a person.
 

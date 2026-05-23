@@ -16,9 +16,9 @@ People feel faster. Productivity is, according to everyone, through the roof.
 
 And yet.
 
-Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
+Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down.
 
-Productivity didn't improve though, at least not immediately.
+Productivity didn't improve, at least not yet.
 
 In 1987, Robert Solow described an earlier version of this exact paradox:
 
@@ -30,7 +30,7 @@ Solow's resolved itself. By the late 1990s, productivity gains arrived, from the
 
 Organisations restructured around the computers they had spent a decade buying. Redesigned to match what the new tools could actually do.
 
-The AI version is in the hype phase. Whether the gains follow depends on whether the work happens to restructure in the wake of this, and that assumes the economics can ever make sense; which is a huge assumption considering the current cost of compute.
+The AI version is still in the adoption phase. Whether the gains follow depends on whether the work happens to restructure in the wake of this, and that assumes the economics can be made to make sense; which is a huge assumption considering the current cost of compute.
 
 # Agents producing for Agents
 
@@ -97,7 +97,7 @@ Two hands drawing each other. No third hand.
 
 I don't have a metric for this but I am seeing it happen. 
 
-Jira tickets clearly written by AI, without acknowledgement, without disclosure. Colleagues running MCP tools to generate insight reports from those same tickets, Agent output becomes Agent input. It's happening in my organisation right now, probably yours too.
+Jira tickets clearly written by AI, without acknowledgement, without disclosure. Colleagues running Model Context Protocol (MCP) tools to generate insight reports from those same tickets, Agent output becomes Agent input. It's happening in my organisation right now, probably yours too. 
 
 By Stage 2, behavioural fixes are too slow. The countermeasures have to become technical — provenance enforcement, generation-depth limits, gating new AI output on whether the previous output was actually read by a person.
 
@@ -107,7 +107,9 @@ The system has to defend itself, because you can no longer rely on humans notici
 
 *The endpoint.*
 
-No traceable human starting point for anything in the system. Output is untrustworthy because trust depends on knowing who said something, and no one knows anymore.
+No traceable human starting point for anything in the system. Output is untrustworthy because trust depends on knowing who said something, and no one knows anymore. 
+
+A marker for this would be if there was an idea being discussed, from a report, that no one could answer "whose idea was this?"
 
 If you can detect this stage, the people who should have been watching have already left. Detection is itself the failure.
 
@@ -129,7 +131,7 @@ That's a different kind of work, at a different scale.
 
 # What we can do, here and now
 
-This is the work that comes after the hype.
+This is the work that comes after the hype. These work at different scales: inside an organisation, in publishing economics, in education, in defence of civil liberties.
 
 ### *Cryptographic provenance for digital work.*
 
@@ -247,6 +249,7 @@ Both hands. Otherwise it's just a drawing, drawing itself.
 - **METR — AI's effect on developer productivity (July 2025).** A randomised study of 16 experienced open-source developers found AI use *slowed* task completion by 19%, despite developers expecting it to speed them up by 24% — and continuing to believe afterwards that it had sped them up by 20%. [Measuring the impact of early-2025 AI on experienced open-source developer productivity](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), METR.
 - **DORA — 2024 State of DevOps Report.** AI adoption significantly increases individual productivity, flow, and job satisfaction while *negatively* impacting team-level software delivery throughput and stability. [dora.dev](https://dora.dev/research/2024/dora-report/).
 - **WebAIM Million — 2026 report.** Of the top one million home pages, 95.9% have detectable WCAG 2 failures — up from 94.8% in 2025, reversing six years of small improvements. [The WebAIM Million](https://webaim.org/projects/million/).
+- **AI-induced technical debt.** Empirical analyses of large codebases — GitClear's review of 153 million changed lines and recent arXiv work on AI-assisted programming — find AI assistants accelerate code addition while increasing technical debt, with the debt remaining rather than being removed. [Debt Behind the AI Boom](https://arxiv.org/html/2603.28592v2), arXiv 2026.
 - **AI compute economics — May 2026.** Microsoft scaled back internal Claude Code licenses after token costs ran ahead of staff salaries; Uber burnt its entire 2026 AI coding budget in four months; an Nvidia executive: "For my team, the cost of compute is far beyond the costs of the employees." [Microsoft reports are exposing AI's real cost problem](https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/), *Fortune*, May 2026.
 - **Dead internet theory.** [Dead Internet theory](https://en.wikipedia.org/wiki/Dead_Internet_theory), Wikipedia.
 - **M.C. Escher, *Drawing Hands* (1948).** Lithograph. [Drawing Hands](https://en.wikipedia.org/wiki/Drawing_Hands), Wikipedia.

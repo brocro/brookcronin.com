@@ -381,3 +381,50 @@ img {
 .post-nav a:hover {
   color: var(--ink);
 }
+
+/* Draftsman's notes ------------------------------------------------- */
+/* Visible in local builds, stripped in CI. Editorial annotations the
+   author wants to see in preview but never on the live site. */
+
+.draftsman-note {
+  margin: 2rem 0;
+  padding: 0.85rem 1.1rem;
+  background: #fff5d1;
+  border-left: 3px solid #c48a14;
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #5a4a10;
+}
+
+@media (prefers-color-scheme: dark) {
+  .draftsman-note {
+    background: #2a2410;
+    border-left-color: #b88b1a;
+    color: #d4b878;
+  }
+}
+
+.draftsman-note-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  margin-bottom: 0.55rem;
+  opacity: 0.75;
+}
+
+.draftsman-note p {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans);
+  font-style: normal;
+  color: inherit;
+  line-height: inherit;
+  hyphens: none;
+}
+
+.draftsman-note p:last-child {
+  margin-bottom: 0;
+}

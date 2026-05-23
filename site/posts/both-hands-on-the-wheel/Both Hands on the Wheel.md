@@ -18,6 +18,13 @@ And yet.
 
 Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
 
+> [!note] Editor: anchor with 3 citations
+> Suggested paragraph to add right here, or to fold sentence-by-sentence into the list above:
+>
+> Look at the evidence we do have. METR found experienced developers using AI took 19% longer on coding tasks than without it — and still believed afterwards the AI had sped them up by 20% (METR, July 2025). The 2024 DORA State of DevOps report found AI adoption boosts individual productivity but degrades team-level delivery throughput and stability. The 2026 WebAIM Million reversed six years of small accessibility improvements; 95.9% of top home pages now show WCAG failures.
+>
+> These three anchor the "and yet" turn. Without them it's vibes; with them it's a sourced claim.
+
 Productivity didn't improve though, at least not measurably.
 
 In 1987, Robert Solow described an earlier version of this exact paradox:
@@ -25,6 +32,15 @@ In 1987, Robert Solow described an earlier version of this exact paradox:
 > *"You can see the computer age everywhere but in the productivity statistics."*
 
 We're living through the AI version of the same paradox in real time.
+
+> [!note] Editor: distinguish from the resolved 1987 paradox
+> The original Solow paradox was *resolved* by the late 1990s — productivity gains arrived once organisations restructured around the computers they had spent a decade buying. Treating Solow as a sealed verdict gets him backwards; the analogy actually leaves the AI case open.
+>
+> Suggested addition right after "in real time.":
+>
+> Solow's resolved itself — by the late 1990s, productivity gains arrived, once organisations restructured around the computers they had spent a decade buying. The lag was real. The resolution was reorganisation.
+>
+> The AI version is currently in the lag phase. Whether it resolves the same way is an open question. The risk is that the lag fills instead with self-referential noise: agents reading agents, summaries citing summaries, motion without direction.
 
 # Agents producing for Agents
 

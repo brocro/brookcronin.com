@@ -38,6 +38,39 @@ function parseFrontmatter(raw) {
   return { meta, body: match[2] };
 }
 
+// --- draftsman's notes ----------------------------------------------
+// Obsidian-style callouts (`> [!note] Title`) render as a visible
+// aside in local builds and are stripped entirely in CI. This lets
+// you leave editorial notes inside a post without leaking them to the
+// live site. Obsidian renders the same syntax as a native callout in
+// its preview, so the author sees them there too.
+
+function processDraftNotes(src) {
+  const isCI = process.env.CI === 'true';
+  const calloutRegex = /^> \[!note\].*(?:\n> ?.*)*/gm;
+  return src.replace(calloutRegex, (match) => {
+    if (isCI) return '';
+    const lines = match.split('\n');
+    const titleRaw = lines[0].replace(/^> \[!note\]\s*/, '').trim();
+    const title = titleRaw || 'Note';
+    const contentLines = lines.slice(1).map(l => l.replace(/^> ?/, ''));
+    // Group content lines into paragraphs by blank lines
+    const paragraphs = [];
+    let current = [];
+    for (const line of contentLines) {
+      if (line.trim().length === 0) {
+        if (current.length > 0) { paragraphs.push(current.join(' ')); current = []; }
+      } else {
+        current.push(line);
+      }
+    }
+    if (current.length > 0) paragraphs.push(current.join(' '));
+    const titleHtml = `<div class="draftsman-note-title">${escapeHtml(title)}</div>`;
+    const contentHtml = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    return `\n\n<aside class="draftsman-note">${titleHtml}${contentHtml}</aside>\n\n`;
+  });
+}
+
 // --- markdown preprocessor ------------------------------------------
 // Demote headings by one level (so post.title stays the only h1), and
 // translate Obsidian-style image embeds (![[file]]) into standard md.
@@ -154,7 +187,7 @@ const posts = sources.map(({ mdPath, assetDir, defaultSlug }) => {
   const slug = meta.slug || slugify(defaultSlug);
   const summary = meta.summary || '';
   const subtitle = meta.subtitle || '';
-  const html = marked.parse(preprocessBody(body));
+  const html = marked.parse(processDraftNotes(preprocessBody(body)));
   return { title, date, slug, summary, subtitle, html, assetDir };
 }).sort((a, b) => b.date - a.date);
 

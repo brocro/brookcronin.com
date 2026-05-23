@@ -18,13 +18,6 @@ And yet.
 
 Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
 
-> [!note] Editor: anchor with 3 citations
-> Suggested paragraph to add right here, or to fold sentence-by-sentence into the list above:
->
-> Look at the evidence we do have. METR found experienced developers using AI took 19% longer on coding tasks than without it — and still believed afterwards the AI had sped them up by 20% (METR, July 2025). The 2024 DORA State of DevOps report found AI adoption boosts individual productivity but degrades team-level delivery throughput and stability. The 2026 WebAIM Million reversed six years of small accessibility improvements; 95.9% of top home pages now show WCAG failures.
->
-> These three anchor the "and yet" turn. Without them it's vibes; with them it's a sourced claim.
-
 Productivity didn't improve though, at least not measurably.
 
 In 1987, Robert Solow described an earlier version of this exact paradox:
@@ -33,14 +26,9 @@ In 1987, Robert Solow described an earlier version of this exact paradox:
 
 We're living through the AI version of the same paradox in real time.
 
-> [!note] Editor: distinguish from the resolved 1987 paradox
-> The original Solow paradox was *resolved* by the late 1990s — productivity gains arrived once organisations restructured around the computers they had spent a decade buying. Treating Solow as a sealed verdict gets him backwards; the analogy actually leaves the AI case open.
->
-> Suggested addition right after "in real time.":
->
-> Solow's resolved itself — by the late 1990s, productivity gains arrived, once organisations restructured around the computers they had spent a decade buying. The lag was real. The resolution was reorganisation.
->
-> The AI version is currently in the lag phase. Whether it resolves the same way is an open question. The risk is that the lag fills instead with self-referential noise: agents reading agents, summaries citing summaries, motion without direction.
+Solow's resolved itself. By the late 1990s, productivity gains arrived, once organisations restructured around the computers they had spent a decade buying. The hype preceded the gains, but the gains came.
+
+The AI version is in the lag phase. Whether the gains follow is an open question. The risk is that the lag fills instead with self-referential noise: agents reading agents, summaries citing summaries, motion without direction.
 
 # Agents producing for Agents
 
@@ -62,6 +50,8 @@ Internal AI tooling is sliding toward exactly this, faster than most teams reali
 Fair use, https://en.wikipedia.org/w/index.php?curid=3475111
 
 Two hands drawing each other into existence. No third hand anywhere in the picture. No draftsman. The image is perfectly plausible and structurally impossible at the same time.
+
+Of course there was a draftsman — Escher. Someone made the system. They stepped away. They forgot to set the halting condition.
 
 # The principle
 
@@ -100,6 +90,8 @@ Agents reading agents reading agents. Outputs cite outputs. The human is no long
 The system looks productive because volume keeps going up. Documents reference other documents in long chains. But nothing new is entering from outside.
 
 Two hands drawing each other. No third hand.
+
+I don't have a metric for this yet. I am seeing it happen. Jira tickets clearly written by AI, posted without acknowledgement. Colleagues running MCP tools to generate insight reports from those same tickets. The chain is forming inside organisations now — mine, and probably yours.
 
 By Stage 2, behavioural fixes are too slow. The countermeasures have to become technical — provenance enforcement, generation-depth limits, gating new AI output on whether the previous output was actually read by a person.
 
@@ -244,6 +236,9 @@ Both hands. Otherwise it's just a drawing, drawing itself.
 # References
 
 - **The Solow paradox.** Robert M. Solow, "We'd Better Watch Out," *New York Times Book Review*, July 12, 1987, p. 36. Reviewing Stephen S. Cohen and John Zysman, *Manufacturing Matters: The Myth of the Post-Industrial Economy*. Broader background: [Productivity paradox](https://en.wikipedia.org/wiki/Productivity_paradox), Wikipedia.
+- **METR — AI's effect on developer productivity (July 2025).** A randomised study of 16 experienced open-source developers found AI use *slowed* task completion by 19%, despite developers expecting it to speed them up by 24% — and continuing to believe afterwards that it had sped them up by 20%. [Measuring the impact of early-2025 AI on experienced open-source developer productivity](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), METR.
+- **DORA — 2024 State of DevOps Report.** AI adoption significantly increases individual productivity, flow, and job satisfaction while *negatively* impacting team-level software delivery throughput and stability. [dora.dev](https://dora.dev/research/2024/dora-report/).
+- **WebAIM Million — 2026 report.** Of the top one million home pages, 95.9% have detectable WCAG 2 failures — up from 94.8% in 2025, reversing six years of small improvements. [The WebAIM Million](https://webaim.org/projects/million/).
 - **Dead internet theory.** [Dead Internet theory](https://en.wikipedia.org/wiki/Dead_Internet_theory), Wikipedia.
 - **M.C. Escher, *Drawing Hands* (1948).** Lithograph. [Drawing Hands](https://en.wikipedia.org/wiki/Drawing_Hands), Wikipedia.
 - **C2PA — Coalition for Content Provenance and Authenticity.** [c2pa.org](https://c2pa.org/). Adobe's user-facing implementation: [Content Credentials](https://contentcredentials.org/).

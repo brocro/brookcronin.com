@@ -18,7 +18,7 @@ And yet.
 
 Software ship velocity hasn't measurably moved. Document quality hasn't improved at scale. Accessibility hasn't advanced. Software complexity is going up, not down. Cognitive load on end users keeps rising.
 
-Whatever is being generated, it isn't yet productivity, by any metric we would associate with it.
+Productivity didn't improve though, at least not measurably.
 
 In 1987, Robert Solow described an earlier version of this exact paradox:
 
@@ -181,9 +181,7 @@ Subscribe to one publication you'd hate to lose, buy one book a month, go to one
 
 ### *Disclosure as a professional norm.*
 
-Writers, designers, researchers who openly mark which parts of their work used AI.
-
-Not as confession, but as courtesy.
+Writers, designers, researchers who openly mark which parts of their work used AI, as a professional courtesy.
 
 The reader gets to know how the work was made. "I drafted this in conversation with Claude" is now an acceptable thing to say in professional writing, and saying it changes how the reader interprets the work.
 

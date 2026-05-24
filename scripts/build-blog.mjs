@@ -215,6 +215,18 @@ for (const f of ['favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png',
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(distDir, f));
 }
 
+// Matrix client discovery (.well-known/matrix/client) — tells Matrix
+// clients pointed at brookcronin.com where the actual homeserver lives.
+// Without this, server-name discovery falls back to the bare domain,
+// which is just the static blog and has no Matrix endpoints.
+ensureDir(path.join(distDir, '.well-known', 'matrix'));
+fs.writeFileSync(
+  path.join(distDir, '.well-known', 'matrix', 'client'),
+  JSON.stringify({
+    'm.homeserver': { base_url: 'https://matrix.brookcronin.com' },
+  }, null, 2) + '\n',
+);
+
 const year = new Date().getFullYear();
 
 ensureDir(path.join(distDir, 'posts'));

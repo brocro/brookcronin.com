@@ -365,7 +365,8 @@ img {
 }
 
 .site-footer-circle {
-  text-align: center;
+  flex-basis: 100%;
+  margin-top: 0.5rem;
 }
 
 .post-nav {

@@ -69,6 +69,7 @@ Design system teams often misread this as resistance.
 It isn't resistance. It's dead reckoning. It will converge if you stay the course.
 
 > *"Products own their destiny… systems equip products to realize that destiny."*
+> 
 > Nathan Curtis — Principles of Designing Systems, EightShapes, 2017
 
 # How the signal spreads

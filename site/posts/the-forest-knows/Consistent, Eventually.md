@@ -10,9 +10,7 @@ summary: Nobody adopts a design system all at once without a mandate. Teams navi
 
 # A project I can't stop thinking about
 
-Someone showed me a project once, at a hackspace near my home, and it stuck. A network of small, solar-powered environmental sensors deployed through a forest. Temperature, humidity, light levels, soil moisture. Each device would take its readings and then, when it had power to spare, send them on.
-
-Not continuously and not in real time, just when it could.
+Someone showed me a project once, at a hackspace near my home, and it stuck. A network of small, solar-powered environmental sensors deployed through a forest. Temperature, humidity, light levels, soil moisture. Each device would take its readings and then, when it had power to spare, send them on. Not on a schedule. Whenever it could.
 
 The data would arrive in irregular bursts. It would thin out at night when the panels weren't charging. It would pick up again at dawn. It would get busier and richer through spring and into summer as the canopy filled out and the light levels changed, and then gradually quieten again as autumn came. On overcast days a trickle of information. On clear days in July, a dense and intricate stream.
 
@@ -26,7 +24,7 @@ The technical term for this, borrowed from distributed systems, is **eventual co
 
 In database engineering, eventual consistency describes a system where nodes don't need to agree at every moment. Different parts of the network may hold slightly different views of the truth. But given time, and absent further changes, they converge. The system as a whole tends toward coherence.
 
-It's the alternative to **strong consistency**, where every read reflects the most recent write, everywhere, immediately. Strong consistency is expensive. It requires coordination. It requires every part of the system to wait for every other part before committing to an answer.
+It's the alternative to **strong consistency**, where every read reflects the most recent write, everywhere, immediately. Strong consistency is expensive. It requires every part of the system to wait for every other part before anyone commits to an answer — and that coordination takes time.
 
 It's less immediate but it works.
 
@@ -58,15 +56,15 @@ Before GPS, ships navigated by dead reckoning.
 
 You know your last confirmed position. You know your heading. You know roughly how fast you're going. From those three things, you calculate where you must be now.
 
-It's approximate. The currents affect you. The wind affects you. Small errors compound over time. But it's not random. It's disciplined approximation.
+It's approximate. The currents affect you. The wind affects you. Small errors compound. But you're working from something real — the last confirmed position, the heading, the best estimate of speed.
 
 The best answer available given what you have, updated as new information arrives.
 
-Product teams that aren't yet on your design system are dead reckoning. They're using the colour they think is the brand blue. They're approximating the spacing. They're referencing a Figma file that's six months out of date. They're not ignoring the system. They're navigating toward it with the instruments they have.
+Product teams that aren't yet on your design system are dead reckoning. They're using the colour they think is the brand blue. They're approximating the spacing. They're referencing a Figma file that's six months out of date. They're navigating toward it with the instruments they have.
 
 Design system teams often misread this as resistance.
 
-It isn't resistance. It's dead reckoning. It will converge if you stay the course.
+That's dead reckoning, not resistance. And it converges, if you stay the course.
 
 > *"Products own their destiny… systems equip products to realize that destiny."*
 > 
@@ -116,7 +114,7 @@ Treat them as early signal, look at what they built independently and ask: what 
 
 I keep coming back to the image of the forest data getting busier in summer.
 
-The system isn't more correct in summer. It's not more legitimate. The individual readings in February were accurate, they just weren't always dense enough yet to reveal the patterns. The density comes with time, and the patterns are only visible once you have enough of it.
+Summer doesn't make the system more correct or more authoritative. The individual readings in February were just as accurate — just not dense enough yet to reveal the patterns. The density comes with time, and the patterns are only visible once you have enough of it.
 
 A design system that's been running for three years in a large organisation looks like this. The early adopters are fully on the library. The next wave is mostly there, with a few surfaces still on old components. The legacy app is dead reckoning on colours and typography, approximating the newer work as best it can. The third-party integration sends whatever signal it can.
 

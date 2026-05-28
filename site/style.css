@@ -364,6 +364,10 @@ img {
   border-bottom-color: var(--ink);
 }
 
+.site-footer-circle {
+  text-align: center;
+}
+
 .post-nav {
   margin-top: 4rem;
   padding-top: 2rem;

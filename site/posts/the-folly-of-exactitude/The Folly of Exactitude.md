@@ -41,7 +41,7 @@ Fiona Apple released an album in 1999 whose full title is 90 words long. It hold
 
 The form was designed for music. But it was designed for imaginary music, the music that exists in the dummy data, with its clean ASCII names and its sensible lengths and its one artist per track. Real music arrived and the form had never met it.
 
-This happens everywhere the model meets the world. Jennifer Null cannot buy an airline ticket online because her surname is a reserved word in most databases, it means "no value," and the booking system reads her name as an empty field. She exists. The form says she doesn't. Randall Munroe drew a comic about a student named `Robert'); DROP TABLE Students;--` whose enrolment deletes the school database. It's a joke. It is also a precise description of what happens when a form assumes names are names and not commands, a real vulnerability class, even if Bobby Tables is not a real student.
+This happens everywhere the model meets the world. Jennifer Null cannot buy an airline ticket online because her surname is a reserved word in most databases, it means "no value," and the booking system reads her name as an empty field. She exists. The form says she doesn't. Randall Munroe drew a comic about a student named `Robert'); DROP TABLE Students;--` whose enrolment deletes the school database. It's a joke about what happens when a database receives text it treats as an instruction rather than data. It is also a precise description of a real, documented, and still-active vulnerability class, even if Bobby Tables is not a real student.
 
 The form looked complete. The dummy data said so. The question the examples raise isn't why the form broke. It's what the designer should have done differently.
 
@@ -104,3 +104,5 @@ The ruins in the desert are what's left of every map someone tried to make compl
 - **Patrick McKenzie,** "Falsehoods Programmers Believe About Names," 2010. kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/
 
 - **Randall Munroe,** "Exploits of a Mom," *xkcd* no. 327. xkcd.com/327/
+
+- **OWASP Foundation,** "A05 Injection," *OWASP Top 10*, 2025. owasp.org/Top10/2025/A05_2025-Injection/

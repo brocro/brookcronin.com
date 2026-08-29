@@ -99,10 +99,10 @@ The ruins in the desert are what's left of every map someone tried to make compl
 
 - **Jorge Luis Borges,** "On Exactitude in Science," 1946. Collected in *Collected Fictions*, translated by Andrew Hurley. Penguin, 1999.
 
-- **Julien Voisin,** "Horrible edge cases to consider when dealing with music," April 2022. dustri.org/b/horrible-edge-cases-to-consider-when-dealing-with-music.html
+- **Julien Voisin,** "Horrible edge cases to consider when dealing with music," April 2022. [dustri.org/b/horrible-edge-cases-to-consider-when-dealing-with-music.html](https://dustri.org/b/horrible-edge-cases-to-consider-when-dealing-with-music.html)
 
-- **Patrick McKenzie,** "Falsehoods Programmers Believe About Names," 2010. kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/
+- **Patrick McKenzie,** "Falsehoods Programmers Believe About Names," 2010. [kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/](https://kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/)
 
-- **Randall Munroe,** "Exploits of a Mom," *xkcd* no. 327. xkcd.com/327/
+- **Randall Munroe,** "Exploits of a Mom," *xkcd* no. 327. [xkcd.com/327/](https://xkcd.com/327/)
 
-- **OWASP Foundation,** "A05 Injection," *OWASP Top 10*, 2025. owasp.org/Top10/2025/A05_2025-Injection/
+- **OWASP Foundation,** "A05 Injection," *OWASP Top 10*, 2025. [owasp.org/Top10/2025/A05_2025-Injection/](https://owasp.org/Top10/2025/A05_2025-Injection/)

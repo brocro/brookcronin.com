@@ -83,18 +83,18 @@ There's a Feist lyric I hear in my mind: *you can't unthink a thought, it's eith
 
 # References
 
-- **Kerry Stevenson,** "Design of the Week: LUNA," *Fabbaloo*, June 8, 2015. fabbaloo.com/2015/06/design-of-the-week-luna
+- **Kerry Stevenson,** "Design of the Week: LUNA," *Fabbaloo*, June 8, 2015. [fabbaloo.com/2015/06/design-of-the-week-luna](https://fabbaloo.com/2015/06/design-of-the-week-luna)
 
-- **NASA Lunar Reconnaissance Orbiter / LOLA,** Lunar elevation data, 2010–. lola.gsfc.nasa.gov
+- **NASA Lunar Reconnaissance Orbiter / LOLA,** Lunar elevation data, 2010–. [pds-geosciences.wustl.edu/missions/lro/lola.htm](https://pds-geosciences.wustl.edu/missions/lro/lola.htm)
 
-- ***Tatort Kunst*,** Deutschlandfunk. podcasts.apple.com/de/podcast/tatort-kunst/id1704972975
+- ***Tatort Kunst*,** Deutschlandfunk. [podcasts.apple.com/de/podcast/tatort-kunst/id1704972975](https://podcasts.apple.com/de/podcast/tatort-kunst/id1704972975)
 
-- **Gartner,** "Hype Cycle for 3D Printing, 2019." gartner.com/en/documents/3947508
+- **Gartner, "Hype Cycle for 3D Printing, 2019"** (as reported by *3Dnatives*). [3dnatives.com/en/gartner-hype-cycle-3dprintingpredictions-150120194](https://www.3dnatives.com/en/gartner-hype-cycle-3dprintingpredictions-150120194/)
 
-- "Segway was supposed to change the world. Two decades later, it just might," *CNN Business*, October 30, 2018. cnn.com/2018/10/30/tech/segway-history
+- "Segway was supposed to change the world. Two decades later, it just might," *CNN Business*, October 30, 2018. [cnn.com/2018/10/30/tech/segway-history](https://cnn.com/2018/10/30/tech/segway-history)
 
-- **IEEE Spectrum,** "The Segway Is Dead, but Its Technology and Vision Lives On." spectrum.ieee.org/the-segway-is-dead-but-its-technology-and-vision-lives-on
+- **IEEE Spectrum,** "The Segway Is Dead, but Its Technology and Vision Lives On." [spectrum.ieee.org/the-segway-is-dead-but-its-technology-and-vision-lives-on](https://spectrum.ieee.org/the-segway-is-dead-but-its-technology-and-vision-lives-on)
 
-- **Wareable,** "Virtual reality: Then and now — why it won't fail this time." wareable.com/vr/virtual-reality-then-now-why-it-wont-fail-this-time
+- **Wareable,** "Virtual reality: Then and now — why it won't fail this time." [wareable.com/vr/virtual-reality-then-now-why-it-wont-fail-this-time](https://wareable.com/vr/virtual-reality-then-now-why-it-wont-fail-this-time)
 
-- **Forbes / YEC,** "The Technology Hype Lifecycle: Google Glass Edition," February 17, 2015. forbes.com/sites/theyec/2015/02/17/the-technology-hype-lifecycle-google-glass-edition/
+- **Forbes / YEC,** "The Technology Hype Lifecycle: Google Glass Edition," February 17, 2015. [forbes.com/sites/theyec/2015/02/17/the-technology-hype-lifecycle-google-glass-edition/](https://forbes.com/sites/theyec/2015/02/17/the-technology-hype-lifecycle-google-glass-edition/)

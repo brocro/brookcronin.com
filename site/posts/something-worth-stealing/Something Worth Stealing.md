@@ -36,11 +36,13 @@ LUNA is 650mm across, about the size of a large school globe, I can't remember h
 
 Someone took it home with them. Without asking.
 
-I find this, as an artist, quietly satisfying.
+I find this, as an artist, satisfying.
 
 # The theft
 
 There are many kinds of art theft, as I have learned listening to the fascinating *Tatort Kunst* podcast. Gold treasures melted down to their material value, a fraction of their cultural worth. Stolen art held as bargaining chips by professional criminals, forgery that's as fascinating, creative and talented as the original. This was none of those, I imagine; just someone taking something they found so desirable they had to have it.
+
+I also like to think, it was in some part about the hype. Someone caught up in the cultural moment, drawn to the object by the buzz around it.
 
 I have a smaller, higher-resolution version of the moon on my desk at home. I made it later, when the machines were better. It sits there and it is beautiful and it is mine, and no one has taken this one yet.
 
@@ -67,6 +69,8 @@ Google Glass was Time Magazine's Best Invention of the Year in 2012. "Glasshole"
 
 That's what happened. Not the future the hype described. Something more specific and, in its own way, more interesting: a technology that settled into what it was actually good at, improved by the people who stayed when everyone else had moved on to the next thing.
 
+The houses are being printed now. ICON in Austin, Texas has built entire streets of them, structural shells completed in 24 to 72 hours, finished homes arriving 20 to 30 per cent cheaper than conventional construction. NASA is working with them on lunar habitat concepts. In medicine, 3D-printed titanium implants are now standard in orthopaedic surgery, custom-fitted to the patient before they go under. Surgeons print scale models of specific tumours and organs to plan complex procedures before making an incision. Even the food printer arrived, just not in any kitchen. Hospitals use it to produce precisely textured meals for patients who can't swallow normally; NASA uses it for space food. The kidney printer from the 2012 press releases hasn't come yet, but the research is accelerating. The hype had the right technology and the wrong timeline.
+
 # What craft needs
 
 What 3D printing taught me wasn't optimism or pessimism about technology. It was something more specific: you can only see inside a hype cycle clearly when you have the craft to read what's actually happening versus what's being promised. I was building the machines. I could feel the gap between the press releases and the print bed. The fires weren't a surprise. The month-long moon print wasn't a surprise either, it was what the technology actually was, once you got close enough to see it.
@@ -75,11 +79,17 @@ I think about this when I read about AI.
 
 People ask me about AI, about the hype, and what I think it means. The honest answer is: I don't know. I'm not building the models. I don't have the equivalent of a month-long failed print to show me where the gap is between the promise and the terrain. I can see the hype. I can hear the promises, agents that will do everything, models that will think, systems that will replace entire categories of work. Some of it is probably true. Some of it is probably the food printer. I can't tell which is which from where I'm standing.
 
-What I've learned is that scepticism without craft is just pessimism. And I don't have the craft here. So I hold my scepticism lightly, watch what the people who are actually building things do next, and wait.
+What I've learned is that scepticism without craft is just pessimism. And I don't have the craft here. But I can read the numbers.
+
+OpenAI is targeting an IPO at over a trillion dollars while posting an annual operating loss of twenty-one billion. Anthropic is reportedly telling investors its total addressable market tops thirty trillion, larger than SpaceX's record estimate, larger than any TAM claim on record. For context, thirty trillion dollars is roughly a third of the entire global economy. And Dario Amodei, CEO of the same company making those projections, wrote something worth sitting with: *it is somewhat awkward to say this as the CEO of an AI company, but I think the next tier of risk is actually AI companies themselves.* A single company, he warned, might accidentally build something capable of threatening the systems that run modern life, decide unilaterally how to handle it, and loop everyone else in after the fact. The thirty-trillion-dollar opportunity and the existential risk disclosure came from the same person, in the same year. That is not a fringe concern from critics. That is the self-description of the people building it.
+
+I understand the scepticism. A trillion-dollar valuation and an existential risk disclosure from the same industry, in the same breath, both claims are enormous, and judging either one fairly requires craft I just told you I don't have.
+
+For now I will watch what the people who are actually building things do next, and wait.
 
 I don't know where all this is going, if there's a crash coming, or if it's something larger than anything the hype is even claiming. What I do know is that it's out there now, and there's no going back. The people who stayed will keep working long after the hype moves on.
 
-There's a Feist lyric I hear in my mind: *you can't unthink a thought, it's either there or not.*
+There's a Feist lyric I keep coming back to: *you can't unthink a thought, either it's there or not.*
 
 # References
 
@@ -98,3 +108,17 @@ There's a Feist lyric I hear in my mind: *you can't unthink a thought, it's eith
 - **Wareable,** "Virtual reality: Then and now — why it won't fail this time." [wareable.com/vr/virtual-reality-then-now-why-it-wont-fail-this-time](https://wareable.com/vr/virtual-reality-then-now-why-it-wont-fail-this-time)
 
 - **Forbes / YEC,** "The Technology Hype Lifecycle: Google Glass Edition," February 17, 2015. [forbes.com/sites/theyec/2015/02/17/the-technology-hype-lifecycle-google-glass-edition/](https://forbes.com/sites/theyec/2015/02/17/the-technology-hype-lifecycle-google-glass-edition/)
+
+- **Built In,** "3D-Printed Houses: 12 Top Examples." [builtin.com/articles/3d-printed-house](https://builtin.com/articles/3d-printed-house)
+
+- **Plastics Today,** "3D Printing Is Still Revolutionizing Medical Technology." [plasticstoday.com/medical/how-3d-printing-is-revolutionizing-medical-technology](https://plasticstoday.com/medical/how-3d-printing-is-revolutionizing-medical-technology)
+
+- **News Medical,** "3D Printing in Healthcare: From Surgical Tools to Organ Transplant Breakthroughs." [news-medical.net/life-sciences/3D-Printing-in-Healthcare-From-Surgical-Tools-to-Organ-Transplant-Breakthroughs.aspx](https://news-medical.net/life-sciences/3D-Printing-in-Healthcare-From-Surgical-Tools-to-Organ-Transplant-Breakthroughs.aspx)
+
+- **The Motley Fool,** "OpenAI Is Reportedly Targeting an IPO Debut Above $1 Trillion," August 27, 2026. [fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/](https://fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/)
+
+- **Yahoo Finance / Tech,** "Anthropic's CEO just warned everyone that the next big AI risk to humanity is 'actually AI companies themselves'." [tech.yahoo.com/ai/claude/articles/anthropics-ceo-just-warned-everyone-051500340.html](https://tech.yahoo.com/ai/claude/articles/anthropics-ceo-just-warned-everyone-051500340.html)
+
+- **Wall Street Journal,** "Anthropic Contemplates the Ultimate Total Addressable Market." [wsj.com/cio-journal/anthropic-contemplates-the-ultimate-total-addressable-market-4cc2deed](https://wsj.com/cio-journal/anthropic-contemplates-the-ultimate-total-addressable-market-4cc2deed)
+
+- **Feist,** "Undiscovered First," *Metals*, 2011. [open.spotify.com/track/6vWqBKW7cGZ7PXhkEcfN8n](https://open.spotify.com/track/6vWqBKW7cGZ7PXhkEcfN8n)
